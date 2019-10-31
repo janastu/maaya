@@ -18,7 +18,7 @@
  	// JSON DATA
  	this.$audioPlayer;
  	this.jsonLD;
- 	this.transcript;
+ 	this.transcript = [];
  	this.annotations;
  	return this;
  }
@@ -46,13 +46,18 @@
  							src: this.audioUrl,
  							type: "audio/mpeg"
  						});
-
  	},
  	getTranscript: function(){
  		/* 
- 		/* Get Transcript data for the audio resource
+ 		/* this.transcriptUrl = [] 
+ 		/* Get Transcript data for all transcript URLs
  		*/
-
+ 		let me = this;
+ 		console.log()
+ 		me.transcriptUrl.forEach(async function(url){
+ 			let gotTranscript = await fetch(url);
+ 			me.transcript.push(await gotTranscript.json());
+ 		});
  	},
  	getAnnotations: function(){
  		/* 
@@ -86,8 +91,7 @@
  	// instantiate MaayaJaal an instance of Maaya
  	window.maayaJaal = new Maaya(maayaTask);
 
- 	//Just for testing, this will be handled in init of Maaya 
- 	maayaJaal.launchAudioPlayer();
+ 	maayaJaal.init();
  }
 
  bootstrap();
