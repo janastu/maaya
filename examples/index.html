@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maaya</title>
+    <!-- Site meta data -->
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../static/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/basic.css">
+    <!-- JS -->
+    <script type="text/javascript" src="../static/js/lib/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/materialize.min.js"></script>
+    <script type="text/javascript" src="../static/js/src/main.js" defer></script>
+
+    <script>
+    /*
+   	 *	Configure data url for Maaya Task
+   	 *	More on Tasks later in docs
+   	 *	Test Task = "maaya-options"
+   	 */
+        var dataUrl = '../static/json/maaya.json';
+    </script>
+</head>
+<body>
+
+
+
+<div id="boombox">
+    <div class="boombox-handle"></div>
+
+    <div class="boombox-body">
+
+        <section class="master-controls">
+            <input type="range" id="volume" class="control-volume" min="0" max="2" value="1" list="gain-vals" step="0.01" data-action="volume" />
+            <datalist id="gain-vals">
+                <option value="0" label="min">
+                <option value="2" label="max">
+            </datalist>
+            <label for="volume">VOL</label>
+        </section>
+
+        <section class="tape">
+
+            <!--audio src="../static/audios/HampiGirijaKalyanaStorybyCraju.mp3" crossorigin="anonymous" ></audio>
+
+            type="audio/mpeg" -->
+
+            <button data-playing="false" class="tape-controls-play" role="switch" aria-checked="false">
+                <span>Play/Pause</span>
+            </button>
+        </section>
+
+    </div><!-- boombox-body -->
+</div>
+
+<script type="text/javascript" src="../static/js/src/player.js"></script>
+
+</body>
+</html>
