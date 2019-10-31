@@ -10,7 +10,7 @@
  Maaya = function (maayaOpts) {
  	// Task can have some options later
  	this.task = maayaOpts.task;
- 	this.jsonLdl = maayaOpts.jsonldUrl;
+ 	this.jsonLdUrl = maayaOpts.jsonldUrl;
  	this.audioUrl = maayaOpts.audioUrl;
  	this.transcriptUrl = maayaOpts.transcripUrl;
  	this.annotationsUrl = maayaOpts.annotationsUrl;
