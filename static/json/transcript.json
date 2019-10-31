@@ -1,8 +1,7 @@
 {
 	"type": "transcript",
 	"language": "eng",
-	"data": [
-		{ 
+	"data": [{
 			"begin": "00:02",
 			"end": "",
 			"id": "e000001",
@@ -96,7 +95,7 @@
 			"begin": "14:37",
 			"end": "",
 			"id": "e000016",
-			"lines": ["Following the wedding, there is week long celebration in the temple, which is called the “Rathotsava”, which also is the annual fair. During this week long fair, the “ Meravanige moorti” or the idols meant for processions, are decorated in different, ornament, flowers and silk, and carried on differently decorated carts or “Ratha”. The week long rituals are named as following based on the design of the Cart used for the day: “ Chandra Mandala Utsava (Moon-cart)”, “ Garudotsava (Eagle-cart)”, “Nandi Utsava (holycow-cart)”, “ Sooryotsava (Sun-cart) ”, “Ashvatotsava (horse-cart)”, “ Shayanotsava (snake-cart)”, and “Gajotsava (Elephant-cart)”. The fourth day of the fair, is observed to be most auspicious, people bring Clothes and ornaments as offerings to the god, and the Wedding or Kalyana is on the final day of this fair."]
+			"lines": ["Following the wedding, there is week long celebration in the temple, which is called the “Rathotsava”, which also is the annual fair. During this week long fair, the “ Meravanige moorti” or the idols meant for processions, are decorated in different, ornament, flowers and silk, and carried on differently decorated carts or “Ratha”. The week long rituals are named as following based on the design of the Cart used for the day “ Chandra Mandala Utsava (Moon-cart)”, “ Garudotsava (Eagle-cart)”, “Nandi Utsava (holycow-cart)”, “ Sooryotsava (Sun-cart) ”, “Ashvatotsava (horse-cart)”, “ Shayanotsava (snake-cart)”, and “Gajotsava (Elephant-cart)”. The fourth day of the fair, is observed to be most auspicious, people bring Clothes and ornaments as offerings to the god, and the Wedding or Kalyana is on the final day of this fair."]
 		},
 		{
 			"begin": "16:57",
@@ -152,5 +151,5 @@
 			"id": "e000025",
 			"lines": ["To conclude, Throughout history of Hampi and it's heritage, we can see the downfall of empires like “Vijayanagara empire”, even societies “Vaishnava Samaaja”, “The Rashtrakoota samaaja”. But still we see excerpts from ancients texts and stories, embedded into common peoples lifestyle, culture and society and thus allowing for everlasting preservation. With further research and study, we find such a close relation to “Girija Kalyana” and to the local societies. Like how Hampi is famously referred to as the Mythical city of “Kishkindha”(City of Apes-from Ramayana), we now can see this place with new light, as region of “Girija Kalyana” too."]
 		}]
-	}
+}
 
