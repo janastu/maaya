@@ -4,7 +4,17 @@
 
 Is the json object, the initial params to start Maaya
 This object will be called `Task`, which at later point 
-may assist with extending Maaya's features
+may assist with extending Maaya's features. example below, transcriptUrl and annotationsUrl will be an array.
+
+```
+{
+	"task": "maaya-options",
+	"jsonldUrl": "../static/json-ld.json",
+	"audioUrl": "../static/audios/HampiGirijaKalyanaStorybyCraju.mp3",
+	"transcripUrl": ["../static/json/transcript.json", "../static/json/transcript-kan.json"],
+	"annotationsUrl": ["../static/json/annotations.json"]
+}
+```
 
 ## json-ld.json
 
