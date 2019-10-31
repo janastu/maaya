@@ -1,5 +1,5 @@
 /*
- * Purpose: Entryppoint
+ * Purpose: Entry point
  *   Import all dependencies of the app
  *   Dependency List: player.js 
  *	 Create Interfaces

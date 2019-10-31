@@ -1,3 +1,11 @@
+/* 
+ * Purpose: Audio Player for the needs of Maayajaal
+ * minimal player with controls
+ * 
+ */
+
+// TODO: too many dependencies from HTML structure,
+// in html. make it independent of any HTML in the index page
 
 audioPlayer = function(input){
 	this.src = input.src;
