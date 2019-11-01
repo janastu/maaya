@@ -3,6 +3,7 @@
 <head>
     <title>Maaya</title>
     <!-- Site meta data -->
+    <meta charset="utf-8"/>
     <link href="../static/json/json-ld.json" rel="alternate" type="application/ld+json" />
 
     <!-- CSS -->
@@ -11,17 +12,9 @@
     <!-- JS -->
     <script type="text/javascript" src="../static/js/lib/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/materialize.min.js"></script>
+    <script type="text/javascript" src="../static/js/src/utilities.js" ></script>
+    <script type="text/javascript" src="../static/js/src/player.js"></script>
     <script type="text/javascript" src="../static/js/src/main.js" defer></script>
-
-    <script>
-    /*
-   	 *	Configure data url for Maaya Task
-   	 *	More on Tasks later in docs
-   	 *	Test Task = "maaya-options"
-   	 */
-        var dataUrl = '../static/json/maaya.json';
-    </script>
-    
 </head>
 <body>
 
@@ -55,7 +48,24 @@
     </div><!-- boombox-body -->
 </div>
 
-<script type="text/javascript" src="../static/js/src/player.js"></script>
+<section class="sidebar">
+	<div id="annotations-container">
+	</div>
 
+	<div id="transcript-container">
+	</div>
+
+</section>
+
+
+
+ <script>
+ /*
+	 *	Configure data url for Maaya Task
+	 *	More on Tasks later in docs
+	 *	Test Task = "maaya-options"
+	 */
+     var dataUrl = '../static/json/maaya.json';
+ </script>
 </body>
 </html>
