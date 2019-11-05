@@ -10,6 +10,7 @@
 audioPlayer = function(input){
 	this.src = input.src;
 	this.type = input.type;
+	this.id = input.id;
 	// instigate our audio context
 
 	// for cross browser
@@ -19,6 +20,7 @@ audioPlayer = function(input){
 	const audioElement = document.createElement('audio');
 	audioElement.src = this.src;
 	audioElement.type = this.type;
+	audioElement.id = this.id;
 	const track = audioCtx.createMediaElementSource(audioElement);
 	const playerContainer = document.querySelectorAll('.tape');
 	playerContainer[0].appendChild(audioElement);

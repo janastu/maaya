@@ -24,11 +24,20 @@
  	this.$annos = [];
  	this.$transcripts = [];
 
+ 	// dom elements and other settings
+
+ 	// hardcoding default lang / container setting, should be inherited 
+ 	// maaya settings option
+ 	this.i18n = 'eng';
+ 	this.$captionsContainer = document.getElementById('captions-container');
+ 	this.$annosContainer = document.getElementById("annotations-container");
+
  	return this;
  }
 
  Maaya.prototype = {
  	init: function() {
+ 		this.captionBlocks = '';
  		this.parseJsonLd();
  		this.launchAudioPlayer();
  		this.prepareTranscript();
@@ -47,10 +56,49 @@
  		/* Prepare and launch audio player
  		 * will expose the playe element to controls(play/pause)
  		*/
- 		this.$audioPlayer = new audioPlayer({
+ 		var self = this;
+ 		self.$audioPlayer = new audioPlayer({
  							src: this.audioUrl,
- 							type: "audio/mpeg"
+ 							type: "audio/mpeg",
+ 							id: "now-playing"
  						});
+
+ 		// Bind time change event to the media element
+ 		self.$audioPlayer.addEventListener('timeupdate', (event) => {
+ 			self.onTimeUpdate(event);
+ 		})
+ 	},
+ 	onTimeUpdate: function() {
+ 		// event listener calls this method
+ 		var self= this;
+ 		self.captionBlocks = self.getCaptionBlocks(self.$audioPlayer.currentTime);
+ 		//var annoBlocks = self.getAnnoBlocks(self.$audioPlayer.currentTime);
+ 		self.update();
+ 	},
+ 	getCaptionBlocks: function() {
+ 		var self = this;
+
+ 		// check for current localization setting eng/kan
+ 		var activeCaptions = self.transcript.find(function(transcript){
+ 			return transcript.language === self.i18n;
+ 		})
+ 		// then with the returned data check for blocks
+ 		var activeBlockIndex = activeCaptions.data.findIndex(function(block, index){
+ 			var startCheck = self.$audioPlayer.currentTime >= hmsToSecondsOnly(block.begin);
+ 			var endCheck =  self.$audioPlayer.currentTime <= hmsToSecondsOnly(block.end);
+ 			var isCheckPassed = startCheck && endCheck;
+ 			return isCheckPassed;
+ 		});
+ 		// find the corresponding dom el from cache
+ 		var captionDom = self.$transcripts.find(function(tDom){
+ 			return Object.keys(tDom)[0] === self.i18n;
+ 		});
+ 		return captionDom[self.i18n][activeBlockIndex];
+ 		
+ 	},
+ 	getAnnoBlocks: function() {
+ 		// almost similar steps as captions, but data
+ 		// will be web anno model
  	},
  	prepareTranscript: function(){
  		/* 
@@ -95,8 +143,8 @@
  		    element = document.createElement('p');
  		    element.setAttribute("id", "c_" + i);
  		    element.setAttribute("class", "playing");
- 		    element.innerText = transcript.data[i].begin + " - " + transcript.data[i].text + " ";
- 		    element.style.display = 'none';
+ 		    element.innerText = transcript.data[i].begin + " - " + transcript.data[i].lines[0] + " ";
+ 		    //element.style.display = 'none';
  		    elements.push(element);
  		}
  		return elements;
@@ -131,23 +179,18 @@
  	},
  	render: function(){
  		/* 
- 		/* render view
+ 		/* render view - this.$captionsContainer
  		*/
  		var self = this;
- 		var $annosContainer = document.getElementById("annotations-container");
- 		var $transcriptContainer = document.getElementById("transcript-container");
- 		// where $annos = [[]]
- 		self.$annos.forEach(function(anno){
- 			anno.forEach(function(annoNode){
- 				$annosContainer.appendChild(annoNode);
- 			});
- 		});
+ 		self.$captionsContainer.append(self.captionBlocks);
+ 		
  	},
  	update: function(){
  		/* 
  		/* Update any state variabled
  		 * like annotations, transcript so on..
  		*/
+ 		this.$captionsContainer.innerHTML = '';
  		this.render();
 
  	},
