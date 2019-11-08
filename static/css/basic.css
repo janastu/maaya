@@ -1,10 +1,13 @@
 body {
-    overflow: hidden;
+    overflow: auto;
     font-family: sans-serif;
 }
 .container.player {
     width: 100%;
     height: auto;
+}
+.container.json-ld {
+	clear: both;
 }
 .container.player .plyr {
     max-height: 500px;
