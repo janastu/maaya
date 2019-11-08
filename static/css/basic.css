@@ -1,24 +1,61 @@
-
-
-#boombox {
-	width: 65vw;
-	max-width:460px;
+body {
+    overflow: hidden;
+    font-family: sans-serif;
 }
-.sidebar {
-	width: 35vw;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	background:#fff;
-	height: 100%;
-	border: 3px solid ghostwhite;
+.container.player {
+    width: 100%;
+    height: auto;
+}
+.container.player .plyr {
+    max-height: 500px;
+}
+.container.sidebar {
+    width: 100%;
+    max-height: 100vh;
+    overflow: scroll;
+}
+#annotations-container ul {
+    padding: 0;
+}
+#annotations-container li {
+    padding: 15px;
+    list-style: none;
+}
+#annotations-container li.active {
+    background: #ccc;
+}
+#annotations-container li .anno-img {
+    width: 100%;
+    height: auto;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #999;
 }
 
-#annotations-container, #transcript-container{
-	width: 100%;
+@media screen and (min-width: 768px) {
+    .container.player {
+        width: 60%;
+        float: left;
+    }
+    .container.sidebar {
+        width: 40%;
+        float: right;
+    }
 }
 
-#annotations-container img {
-	width:100%;
-	height: auto;
+@media screen and (min-width: 990px) {
+    .container.player {
+        width: 70%;
+        float: left;
+    }
+    .container.sidebar {
+        width: 30%;
+        float: right;
+    }
 }

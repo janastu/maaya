@@ -5,6 +5,9 @@ const fetchAndParse = async function(url){
 	return finalResponse;
 }
 
+const secondToHHMMSS = function(seconds){
+	return new Date(seconds * 1000).toISOString().substr(11, 8);
+}
 const hmsToSecondsOnly = function(str) {
 	var p = str.split(':'),
 	 s = 0, m = 1;

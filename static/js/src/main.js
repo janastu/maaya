@@ -1,20 +1,16 @@
-/*
- * Purpose: Entry point
- *   Import all dependencies of the app
- *   Dependency List: player.js 
- *	 Create Interfaces
- *	 Bind Events
- *	 Launch app
- */
-
-
  Maaya = function (maayaOpts) {
  	// Task can have some options later
  	this.task = maayaOpts.task;
  	this.jsonLdUrl = maayaOpts.jsonldUrl;
  	this.audioUrl = maayaOpts.audioUrl;
- 	this.transcriptUrl = maayaOpts.transcripUrl;
+ 	this.captionsUrl = maayaOpts.captionsUrl;
  	this.annotationsUrl = maayaOpts.annotationsUrl;
+
+ 	// hardcoding default lang / container setting, should be inherited 
+ 	// maaya settings option
+ 	this.i18n = 'eng';
+ 	this.$captionsContainer = document.getElementById('captions-container');
+ 	this.$annosContainer = document.getElementById("annotations-container");
 
  	// JSON DATA
  	this.$audioPlayer;
@@ -23,26 +19,24 @@
  	this.annotations = [];
  	this.$annos = [];
  	this.$transcripts = [];
-
- 	// dom elements and other settings
-
- 	// hardcoding default lang / container setting, should be inherited 
- 	// maaya settings option
- 	this.i18n = 'eng';
- 	this.$captionsContainer = document.getElementById('captions-container');
- 	this.$annosContainer = document.getElementById("annotations-container");
+ 	this.currentBlocks = {};
 
  	return this;
  }
 
+
  Maaya.prototype = {
- 	init: function() {
- 		this.captionBlocks = '';
- 		this.parseJsonLd();
- 		this.launchAudioPlayer();
- 		this.prepareTranscript();
- 		this.prepareAnnotations();
- 		this.render();
+ 	init: function(playerId, options) {
+ 		console.log(playerId, options);
+ 		var self = this;
+ 		this.plyr = new Plyr(playerId);
+ 		this.fetchAnnotations();
+ 		this.plyr.on('timeupdate', event => {
+ 			
+ 		    const instance = event.detail.plyr;
+ 		    self.renderAnnos();
+ 		});
+ 		this.setPlyrSource(options);
  	},
  	parseJsonLd: async function(){
  		/* Parse JSON-LD for validity and set other variables
@@ -51,154 +45,88 @@
  		this.jsonLD = await fetchAndParse(this.jsonLdUrl);
 
  	},
- 	launchAudioPlayer: function(){
- 		/* 
- 		/* Prepare and launch audio player
- 		 * will expose the playe element to controls(play/pause)
- 		*/
+ 	setPlyrSource: function(sourceOptions) {
  		var self = this;
- 		self.$audioPlayer = new audioPlayer({
- 							src: this.audioUrl,
- 							type: "audio/mpeg",
- 							id: "now-playing"
- 						});
-
- 		// Bind time change event to the media element
- 		self.$audioPlayer.addEventListener('timeupdate', (event) => {
- 			self.onTimeUpdate(event);
- 		})
- 	},
- 	onTimeUpdate: function() {
- 		// event listener calls this method
- 		var self= this;
- 		self.captionBlocks = self.getCaptionBlocks(self.$audioPlayer.currentTime);
- 		//var annoBlocks = self.getAnnoBlocks(self.$audioPlayer.currentTime);
- 		self.update();
- 	},
- 	getCaptionBlocks: function() {
- 		var self = this;
-
- 		// check for current localization setting eng/kan
- 		var activeCaptions = self.transcript.find(function(transcript){
- 			return transcript.language === self.i18n;
- 		})
- 		// then with the returned data check for blocks
- 		var activeBlockIndex = activeCaptions.data.findIndex(function(block, index){
- 			var startCheck = self.$audioPlayer.currentTime >= hmsToSecondsOnly(block.begin);
- 			var endCheck =  self.$audioPlayer.currentTime <= hmsToSecondsOnly(block.end);
- 			var isCheckPassed = startCheck && endCheck;
- 			return isCheckPassed;
+ 		//to create caption track options
+ 		var langs = Object.keys(self.captionsUrl);
+ 		var tracks = langs.map(function(lang){
+ 			return {
+	            kind: 'captions',
+	            label: lang.toUpperCase(),
+	            srclang: lang,
+	            src: self.captionsUrl[lang]
+        	};
  		});
- 		// find the corresponding dom el from cache
- 		var captionDom = self.$transcripts.find(function(tDom){
- 			return Object.keys(tDom)[0] === self.i18n;
- 		});
- 		return captionDom[self.i18n][activeBlockIndex];
  		
+ 		sourceOptions.tracks = tracks;
+ 		// Set source
+ 		this.plyr.source = sourceOptions;
  	},
- 	getAnnoBlocks: function() {
- 		// almost similar steps as captions, but data
- 		// will be web anno model
- 	},
- 	prepareTranscript: function(){
- 		/* 
- 		/* this.transcriptUrl = [] 
- 		/* Get Transcript data for all transcript URLs
- 		*/
- 		let me = this;
- 		me.transcriptUrl.forEach(async function(url){
- 			let gotTranscript = await fetchAndParse(url);
- 			//let responseData = await gotTranscript.json();
- 			me.transcript.push(gotTranscript);
- 			// to have the language of the transcript as key
- 			// and data as value
- 			var newObject = new Object();
- 			newObject[gotTranscript.language] = me.transcriptToDom(gotTranscript);
- 			me.$transcripts.push(newObject);
- 		});
- 	},
- 	prepareAnnotations: function(){
+
+ 	fetchAnnotations: function(){
  		/* 
  		/* Get Annotations data for the audio resource
  		*/
  		let me = this;
- 		me.annotationsUrl.forEach(async function(url){
- 			let gotAnnos = await fetchAndParse(url);
- 			// similar to transcripts, this data may need a index
- 			// or key in future, may be username: annos 			
- 			me.annotations.push(gotAnnos);
- 			// prepare DOM elements for the data
- 			me.$annos.push(me.annotationsToDom(gotAnnos.data));
+ 		
+ 		$.get(me.annotationsUrl)
+ 		.done(function(response){
+ 			var parser = new WebVTTParser();
+ 			me.annotations.push(parser.parse(response));
+ 			me.renderAnnosInSidebar();
  		});
- 	},
- 	transcriptToDom: function(transcript){
- 		/* Purpose:
- 		 * returns an array of dom elements 
- 		 * for each transcript source
- 		 * 
- 		 */
- 		var element;
- 		var elements = [];
- 		for (var i = 0; i < transcript.data.length; i++) {
- 		    element = document.createElement('p');
- 		    element.setAttribute("id", "c_" + i);
- 		    element.setAttribute("class", "playing");
- 		    element.innerText = transcript.data[i].begin + " - " + transcript.data[i].lines[0] + " ";
- 		    //element.style.display = 'none';
- 		    elements.push(element);
- 		}
- 		return elements;
- 	},
- 	annotationsToDom: function(annos) {
- 		/* Purpose:
- 		 * returns an array of dom elements depending on
- 		 * the resource type specified in the annotation
- 		 * currently handles type "image" & "embed"
- 		 */
- 		var element;
- 		var elements = [];
- 		for (var i = 0; i < annos.length; i++) {
- 			for(var j=0; j < annos[i].resources.length; j++){
- 				if(annos[i].resources[j].type === "image"){
- 					element = document.createElement('img');
- 					element.setAttribute("id", "r_" + i);
- 					element.setAttribute("class", "playing");
- 					element.setAttribute("src", annos[i].resources[j].url);
- 				}
- 				if(annos[i].resources[j].type === "embed"){
- 					element = document.createElement('div');
- 					element.setAttribute("id", "r_" + i + j);
- 					element.setAttribute("class", "playing");
- 					element.innerHTML = annos[i].resources[j].html;
- 				}
- 				element.style.display = 'none';
- 				elements.push(element);
- 			}
- 		}
- 		return elements;
- 	},
- 	render: function(){
- 		/* 
- 		/* render view - this.$captionsContainer
- 		*/
- 		var self = this;
- 		self.$captionsContainer.append(self.captionBlocks);
  		
  	},
- 	update: function(){
- 		/* 
- 		/* Update any state variabled
- 		 * like annotations, transcript so on..
- 		*/
- 		this.$captionsContainer.innerHTML = '';
- 		this.render();
+ 	renderAnnosInSidebar: function() {
+ 		var self = this;
+ 		self.$annosContainer.innerHTML = "";
+ 		var $ul = document.createElement('ul');
+ 		this.annotations[0].cues.forEach(function(cue){
+ 			var $li = document.createElement('li');
+ 			$li.setAttribute('data-start', cue.startTime);
+ 			$li.setAttribute('data-end', cue.endTime);
+ 			var $label = document.createElement('label');
+ 			$label.setAttribute('class', 'badge');
+ 			$label.innerHTML = secondToHHMMSS(cue.startTime);
+ 			$li.addEventListener('click', function(event){
+ 				console.log(event.currentTarget.dataset);
+ 				self.plyr.currentTime = Number(event.currentTarget.dataset.start);
+ 			});
+ 			var $img = document.createElement('img');
+ 			$img.src = cue.text;
+ 			$img.setAttribute('class', 'anno-img');
+ 			$li.append($label, $img);
+ 			$ul.append($li);
+ 		});
+ 		self.$annosContainer.append($ul);
 
  	},
- 	destroy: function(){
+ 	renderAnnos: function(){
+ 		var self = this;
+ 		
+ 		// render images in video poster el
+ 		this.annotations[0].cues.forEach(function(cue){
+ 			var startCheck = self.plyr.currentTime >= cue.startTime;
+ 			var endCheck =  cue.endTime >= self.plyr.currentTime;
+ 			var isCheckPassed = startCheck && endCheck;	
+ 			if (isCheckPassed) {
+ 				$('video').attr('poster', cue.text);
+ 				// scroll relevant img in sidebar
+ 				var activeAnno = document.querySelector('[data-start="'+ cue.startTime +'"]');
+ 				var isActive = document.querySelector("#annotations-container .active");
+ 				if(isActive) isActive.removeAttribute('class', 'active');
+
+ 				activeAnno.setAttribute('class', 'active');
+ 				activeAnno.scrollIntoView({
+ 					behaviour: "smooth",
+ 				
+ 					inline: "start"
+ 				});
+ 			}
+ 		});
 
  	}
  }
-
 
  async function bootstrap() {
  	// depends on dataUrl - configured
@@ -209,7 +137,21 @@
  	window.maayaJaal = new Maaya(maayaTask);
 
  	//initialize the instance
- 	maayaJaal.init();
+ 	maayaJaal.init("#audio-player", {
+ 					type: 'video', 
+ 					title: maayaTask.title,
+ 					poster: maayaTask.poster, 
+ 					sources: [{
+ 							src: maayaTask.audioUrl, 
+ 							type: 'audio/mp3'}],
+ 					captions: {
+ 						active: true,
+ 						language: 'en',
+ 						update: false
+ 					}
+ 				});
  }
 
- bootstrap();
+$(document).ready(function(){
+	bootstrap();
+	});

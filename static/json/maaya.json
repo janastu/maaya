@@ -1,9 +1,0 @@
-
-
-{
-	"task": "maaya-options",
-	"jsonldUrl": "../static/json/json-ld.json",
-	"audioUrl": "../static/audios/HampiGirijaKalyanaStorybyCraju.mp3",
-	"transcripUrl": ["../static/json/transcript.json", "../static/json/transcript-kan.json"],
-	"annotationsUrl": ["../static/json/annotations.json"]
-}
