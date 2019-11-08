@@ -24,7 +24,7 @@
  "thumbnailUrl": "",
  "publisher": {
  	"@context": "https://schema.org",
- 	"@type": "Organization",
+ 	"@type": "Person",
  	"name": "Cheluvaraju",
  	"logo": "logo.jpg"
  	},
@@ -32,7 +32,10 @@
  "audio": {
 	"@context": "https://schema.org",
 	"@type": "AudioObject",
-	"transcript": "url_to_transcript.com",
+	"transcript": {
+					"en": "metadata/webvtt/captions-en.vtt", 
+					"ka": "metadata/webvtt/captions-ka.vtt"
+				},
 	"bitrate": "",
 	"contentSize": "",
 	"contentUrl": "http://team.servelots.com/my/pradeep/chaluvaraju/HampiGirijaKalyanaStorybyCraju.mp3",
