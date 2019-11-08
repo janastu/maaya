@@ -1,23 +1,8 @@
- /* Purpose: Global Maaya class
+ /* Purpose: Global Yantra class, a kind of controller
  */
 
- Maaya = function (maayaOpts) {
- 	// Task can have some options later
- 	this.task = maayaOpts.task;
- 	// jsonLd url contains metadata of the presentation
- 	this.jsonLdUrl = maayaOpts.jsonldUrl;
- 	// relative or absolute path to Audio source 
- 	this.audioUrl = maayaOpts.audioUrl;
- 	/* captions URL = json object
- 	 * {
-	 *   "en": "./path/to/vtt/file",
-	 *   "ka": "en": "./path/to/vtt/file"
- 	 * }
- 	 *
- 	 */
- 	this.captionsUrl = maayaOpts.captionsUrl;
- 	// relative or absolute path to annotations in webVTT format
- 	this.annotationsUrl = maayaOpts.annotationsUrl;	
+ Yantra = function (maayaOpts) {
+ 	this.settings = maayaOpts;
  	// DOM manipulation class
  	this.$view;
  	// The Player 
@@ -30,7 +15,7 @@
  }
 
 // Define methods
- Maaya.prototype = {
+ Yantra.prototype = {
  	init: async function(playerId, options) {
  		var self = this;
  		self.playerEl = playerId;
@@ -53,7 +38,7 @@
  		/* Parse JSON-LD for validity and set other variables
  		/* required for rendering view
  		*/
- 		this.jsonLD = await controller.fetchAndParse(this.jsonLdUrl);
+ 		this.jsonLD = await controller.fetchAndParse(this.settings.jsonldUrl);
  		return;
  	},
  	launchPlayer: function(){
@@ -64,13 +49,13 @@
  	setPlyrSource: function(sourceOptions) {
  		var self = this;
  		//to create caption track options
- 		var langs = Object.keys(self.captionsUrl);
+ 		var langs = Object.keys(self.settings.captionsUrl);
  		var tracks = langs.map(function(lang){
  			return {
 	            kind: 'captions',
 	            label: lang.toUpperCase(),
 	            srclang: lang,
-	            src: self.captionsUrl[lang]
+	            src: self.settings.captionsUrl[lang]
         	};
  		});
  		
@@ -85,7 +70,7 @@
  		*/
  		let me = this;
  		
- 		$.get(me.annotationsUrl)
+ 		$.get(me.settings.annotationsUrl)
  		.done(function(response){
  			var parser = new WebVTTParser();
  			me.annotations = parser.parse(response);
@@ -97,18 +82,18 @@
  async function bootstrap() {
  	// depends on dataUrl - configured
  	// in html script tag as a js var
- 	const maayaTask = await controller.fetchAndParse(dataUrl);;
+ 	const maayaSettings = await controller.fetchAndParse(dataUrl);
 
  	// instantiate MaayaJaal an instance of Maaya
- 	window.maayaJaal = new Maaya(maayaTask);
+ 	window.Maaya = new Yantra(maayaSettings);
 
  	//initialize the instance
- 	maayaJaal.init("#audio-player", {
+ 	Maaya.init("#audio-player", {
  					type: 'video', 
- 					title: maayaTask.title,
- 					poster: maayaTask.poster, 
+ 					title: maayaSettings.title,
+ 					poster: maayaSettings.poster, 
  					sources: [{
- 							src: maayaTask.audioUrl, 
+ 							src: maayaSettings.audioUrl, 
  							type: 'audio/mp3'}],
  					captions: {
  						active: true,

@@ -14,8 +14,8 @@ body {
 }
 .container.sidebar {
     width: 100%;
-    max-height: 100vh;
-    overflow: scroll;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 #annotations-container ul {
     padding: 0;
