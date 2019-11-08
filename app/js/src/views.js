@@ -38,6 +38,7 @@ maayaView.prototype = {
 			var $img = document.createElement('img');
 			$img.src = cue.text;
 			$img.setAttribute('class', 'anno-img');
+			$img.setAttribute('loading', 'lazy');
 			$li.append($label, $img);
 			$ul.append($li);
 		});
