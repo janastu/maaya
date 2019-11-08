@@ -9,8 +9,8 @@
  	// hardcoding default lang / container setting, should be inherited 
  	// maaya settings option
  	this.i18n = 'eng';
- 	this.$captionsContainer = document.getElementById('captions-container');
- 	this.$annosContainer = document.getElementById("annotations-container");
+ 	this.$captionsContainer;
+ 	this.$annosContainer;
 
  	// JSON DATA
  	this.$audioPlayer;
@@ -28,22 +28,40 @@
  Maaya.prototype = {
  	init: function(playerId, options) {
  		console.log(playerId, options);
+
  		var self = this;
- 		this.plyr = new Plyr(playerId);
- 		this.fetchAnnotations();
- 		this.plyr.on('timeupdate', event => {
- 			
- 		    const instance = event.detail.plyr;
- 		    self.renderAnnos();
- 		});
- 		this.setPlyrSource(options);
+ 		self.playerEl = playerId;
+ 		self.initOptions = options;
+ 		this.parseJsonLd();
  	},
  	parseJsonLd: async function(){
  		/* Parse JSON-LD for validity and set other variables
  		/* required for rendering view
  		*/
  		this.jsonLD = await fetchAndParse(this.jsonLdUrl);
+ 		var layoutTemplate = document.querySelector("#maaya-layout");
+ 		var templateClone = document.importNode(layoutTemplate.content, true);
+ 		var heading = templateClone.querySelector("header h1");
+ 		var subHeading = templateClone.querySelector("header h4");
+ 		var metaContainer = templateClone.querySelector("#metadata-container");
+ 		
+ 		heading.textContent = this.jsonLD["headline"];
+ 		subHeading.textContent = this.jsonLD["author"];
+ 		metaContainer.textContent = JSON.stringify(this.jsonLD, undefined, 2);
+ 		await document.body.appendChild(templateClone);
+ 		this.$annosContainer = document.querySelector("#annotations-container");
+ 		this.launchPlayer();
+ 	},
+ 	launchPlayer: function(){
 
+ 		this.plyr = new Plyr(this.playerEl);
+ 		this.fetchAnnotations();
+ 		this.plyr.on('timeupdate', event => {
+ 			
+ 		    const instance = event.detail.plyr;
+ 		    self.renderAnnoInPoster();
+ 		});
+ 		this.setPlyrSource(this.initOptions);
  	},
  	setPlyrSource: function(sourceOptions) {
  		var self = this;
@@ -101,7 +119,7 @@
  		self.$annosContainer.append($ul);
 
  	},
- 	renderAnnos: function(){
+ 	renderAnnoInPoster: function(){
  		var self = this;
  		
  		// render images in video poster el
