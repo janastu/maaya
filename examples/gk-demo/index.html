@@ -21,22 +21,34 @@
 
 
 
-<section class="container player">
-    <h1> Girija Kalyana</h1>
-    <h4> By Prof. Cheluvaraju</h4>
-    <audio id="audio-player">
-    </audio>
-</section>
+<template id="maaya-layout">
+    <header>
+        <h1></h1>
+        <h4></h4>
+    </header>
 
-<section class="container sidebar">
-    <h2> ANNOTATIONS </h2>
-	<div id="annotations-container">
-	</div>
+    <section class="container player">
+        
+        <audio id="audio-player">
+        </audio>
+    </section>
 
-	<div id="captions-container">
-	</div>
+    <section class="container sidebar">
+    
+        <div id="annotations-container">
+        </div>
 
-</section>
+    </section>
+
+    <section class="container json-ld">
+        <pre id="metadata-container">
+          
+        </pre>
+    </section>
+
+
+</template>
+
 
 
 
@@ -48,6 +60,11 @@
 	 */
      var dataUrl = 'settings/settings.json';
  </script>
- <script type="text/javascript"></script>
+ <script type="text/javascript">
+
+
+ </script>
+
+ 
 </body>
 </html>
