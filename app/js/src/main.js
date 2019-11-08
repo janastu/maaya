@@ -43,7 +43,32 @@
  	},
  	launchPlayer: function(){
  		// initialize Plyr
- 		var plyr = new Plyr(this.playerEl);
+ 		var plyr = new Plyr(this.playerEl, {
+					ratio: '16:9',
+					captions: {
+						active: true,
+						language: 'en',
+						update: false
+					},
+					controls: [
+			        'play-large',
+			        // 'restart',
+			        'rewind',
+			        'play',
+			        'fast-forward',
+			        'progress',
+			        'current-time',
+			        'duration',
+			        'mute',
+			        'volume',
+			        'captions',
+			        'settings',
+			        //'pip',
+			        //'airplay',
+			        // 'download',
+			        'fullscreen',
+			   	 	]
+ 		});
  		return plyr;
  	},
  	setPlyrSource: function(sourceOptions) {
@@ -94,15 +119,10 @@
  					poster: maayaSettings.poster, 
  					sources: [{
  							src: maayaSettings.audioUrl, 
- 							type: 'audio/mp3'}],
- 					captions: {
- 						active: true,
- 						language: 'en',
- 						update: false
- 					}
+ 							type: 'audio/mp3'}]
  				});
  }
 
 $(document).ready(function(){
 	bootstrap();
-	});
+});
