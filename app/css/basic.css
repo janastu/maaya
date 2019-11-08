@@ -14,6 +14,7 @@ body {
 }
 .container.sidebar {
     width: 100%;
+    min-height:40vh;
     max-height: 80vh;
     overflow-y: scroll;
 }
@@ -23,6 +24,7 @@ body {
 #annotations-container li {
     padding: 15px;
     list-style: none;
+    min-height: 250px;
 }
 #annotations-container li.active {
     background: #ccc;
