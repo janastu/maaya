@@ -8,16 +8,14 @@ from Images, Audio and subtitles.
 ```
 maaya
 +-- app
-+    +-- css   // Stylesheets
-+    +-- img  // Images cache
-+    +-- js  //  Application scripts
-         +-- lib // Vendor depenencies
-         +-- src
-             +-- main.js    //Application entrypoint
-             +-- view.js 
-             +-- controller.js
-
-
+|    +-- css   // Stylesheets
+|    +-- img  // Images cache
+|    +-- js  //  Application scripts
+|    |     +-- lib // Vendor depenencies
+|    |     +-- src
+|    |     |    |-- main.js    //Application entrypoint
+|    |     |    |-- view.js 
+|    |     |    |-- controller.js
 +-- examples
 |    +-- gk-demo
 |    |     +-- audio
