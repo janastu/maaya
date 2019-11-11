@@ -8,11 +8,16 @@ may assist with extending Maaya's features. example below, transcriptUrl and ann
 
 ```
 {
-	"task": "maaya-options",
-	"jsonldUrl": "../static/json-ld.json",
-	"audioUrl": "../static/audios/HampiGirijaKalyanaStorybyCraju.mp3",
-	"transcripUrl": ["../static/json/transcript.json", "../static/json/transcript-kan.json"],
-	"annotationsUrl": ["../static/json/annotations.json"]
+	"task": "maaya-options", 
+	"title": "Your Presentation Title",
+	"jsonldUrl": "settings/settings.json",
+	"audioUrl": "path to web audio file mp3/ogg",
+	"transcripUrl": {
+		    "en": "metadata/webvtt/captions-en.vtt", 
+		    "ka": "metadata/webvtt/captions-ka.vtt"
+		    },
+	"annotationsUrl": "metadata/webvtt/img-annos.vtt",
+	"poster": "http://gk.chaluvaraju.pantoto.org/static/uploads/mangalya_daarana2.JPG"
 }
 ```
 
@@ -22,15 +27,17 @@ The Metadata of the Digital media / Content
 this example as reference to `schema.org->Article`
 
 ## Transcript
-JSON structure similar to https://github.com/aeneas01/aeneas
 
-Default `transcript.json => English transcript of the audio`
-Language options must be seperated by `-`
-ex: kannada transcript will be `transcript-kan.json`
+Keys 2 char language descriptor
+val path to captions file
 
 ## Annotations
 
-Media annotations to the audio file, could be Image, Link, Embed
+Media annotations to the audio file, supports images only
+
+## poster
+
+The image to be shown on media player init
 
 
 
