@@ -1,10 +1,18 @@
+:root {
+  --main-color: #00b3ff;
+  --secondary-color: rgba(0,179,255,.5);
+  --text-color: #3d3c3c;
+}
+
 body {
     overflow: auto;
     font-family: sans-serif;
+    color: var(--text-color);
 }
 .container.player {
     width: 100%;
     height: auto;
+    padding-top: 25px;
 }
 .container.json-ld {
 	clear: both;
@@ -17,6 +25,8 @@ body {
     min-height:40vh;
     max-height: 80vh;
     overflow-y: scroll;
+    background: rgba(239, 237, 237, 0.55);
+    margin-top: 25px;
 }
 #annotations-container ul {
     padding: 0;
@@ -25,9 +35,10 @@ body {
     padding: 15px;
     list-style: none;
     min-height: 250px;
+    cursor: pointer;
 }
 #annotations-container li.active {
-    background: #ccc;
+    background: var(--secondary-color);
 }
 #annotations-container li .anno-img {
     width: 100%;
