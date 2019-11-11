@@ -3,37 +3,6 @@
 Maaya is a class of utilities to generaate a AV presentation
 from Images, Audio and subtitles.
 
-
-## Directory structure
-```
-maaya
-+-- app
-|    +-- css   // Stylesheets
-|    +-- img  // Images cache
-|    +-- js  //  Application scripts
-|    |     +-- lib // Vendor depenencies
-|    |     +-- src
-|    |     |    |-- main.js    //Application entrypoint
-|    |     |    |-- view.js 
-|    |     |    |-- controller.js
-+-- examples
-|    +-- gk-demo
-|    |     +-- audio
-|    |     |   |-- audio.mp3
-|    |     +-- images
-|    |     +-- metadata
-|    |     |    +-- webvtt
-|    |     |        |-- captions-en.vtt
-|    |     |        |-- captions-ka.vtt
-|    |     |        |-- img-annos.vtt
-|    |     +-- settings
-|    |     |    |-- json-ld.json
-|    |     |    |-- settings.json
-|    |     |    |-- README.md
-|    |     |-- index.html        
-
-```
-
 ## Make your own
 Copy one of the directories from the examples folder.
 and edit the settings and add your own images, audio and metadata.
@@ -71,3 +40,35 @@ This project also includes a webVTT validator, available at
 localhost/validator 
 
 currently this project only supports images in the img-annos.vtt
+
+
+## Directory structure
+```
+maaya
++-- app
+|    +-- css   // Stylesheets
+|    +-- img  // Images cache
+|    +-- js  //  Application scripts
+|    |     +-- lib // Vendor depenencies
+|    |     +-- src
+|    |     |    |-- main.js    //Application entrypoint
+|    |     |    |-- view.js 
+|    |     |    |-- controller.js
++-- examples
+|    +-- gk-demo
+|    |     +-- audio
+|    |     |   |-- audio.mp3
+|    |     +-- images
+|    |     +-- metadata
+|    |     |    +-- webvtt
+|    |     |        |-- captions-en.vtt
+|    |     |        |-- captions-ka.vtt
+|    |     |        |-- img-annos.vtt
+|    |     +-- settings
+|    |     |    |-- json-ld.json
+|    |     |    |-- settings.json
+|    |     |    |-- README.md
+|    |     |-- index.html        
+
+```
+
