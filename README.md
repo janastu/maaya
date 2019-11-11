@@ -19,20 +19,20 @@ maaya
 
 
 +-- examples
-+    +-- gk-demo
+|    +-- gk-demo
 |    |     +-- audio
-|    |     |   +-- audio.mp3
+|    |     |   |-- audio.mp3
 |    |     +-- images
 |    |     +-- metadata
 |    |     |    +-- webvtt
-|    |     |        +-- captions-en.vtt
-|    |     |        +-- captions-ka.vtt
-|    |     |        +-- img-annos.vtt
+|    |     |        |-- captions-en.vtt
+|    |     |        |-- captions-ka.vtt
+|    |     |        |-- img-annos.vtt
 |    |     +-- settings
-|    |     |    +-- json-ld.json
-|    |     |    +-- settings.json
-|    |     |    +-- README.md
-|    |     +-- index.html        
+|    |     |    |-- json-ld.json
+|    |     |    |-- settings.json
+|    |     |    |-- README.md
+|    |     |-- index.html        
 
 ```
 
