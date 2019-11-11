@@ -48,15 +48,15 @@ For this version the configuration object will be saved in `settings/settings.js
 ```
 {
 	"task": "maaya-options", 
-    "title": "Your Presentation Title",
+	"title": "Your Presentation Title",
 	"jsonldUrl": "settings/settings.json",
 	"audioUrl": "path to web audio file mp3/ogg",
 	"transcripUrl": {
-                    "en": "metadata/webvtt/captions-en.vtt", 
-                    "ka": "metadata/webvtt/captions-ka.vtt"
-                    },
+		    "en": "metadata/webvtt/captions-en.vtt", 
+		    "ka": "metadata/webvtt/captions-ka.vtt"
+		    },
 	"annotationsUrl": "metadata/webvtt/img-annos.vtt",
-    "poster": "http://gk.chaluvaraju.pantoto.org/static/uploads/mangalya_daarana2.JPG"
+	"poster": "http://gk.chaluvaraju.pantoto.org/static/uploads/mangalya_daarana2.JPG"
 }
 ```
 #### json-ld
