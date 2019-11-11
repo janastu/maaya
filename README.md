@@ -17,28 +17,22 @@ maaya
              +-- view.js 
              +-- controller.js
 
-+    +-- json  // All data sources
-         +-- maaya.json
-         +-- json-ld.json
-         +-- transcript.json
-         +-- transcript-kan.json
-         +-- annotations.json
+
 +-- examples
 +    +-- gk-demo
-         +-- audio
-             +-- audio.mp3
-         +-- images
-         +-- metadata
-             +-- webvtt
-                 +-- captions-en.vtt
-                 +-- captions-ka.vtt
-                 +-- img-annos.vtt
-         +-- settings
-             +-- json-ld.json
-             +-- settings.json
-             +-- README.md
-     +-- index.html
-         
+|    |     +-- audio
+|    |     |   +-- audio.mp3
+|    |     +-- images
+|    |     +-- metadata
+|    |     |    +-- webvtt
+|    |     |        +-- captions-en.vtt
+|    |     |        +-- captions-ka.vtt
+|    |     |        +-- img-annos.vtt
+|    |     +-- settings
+|    |     |    +-- json-ld.json
+|    |     |    +-- settings.json
+|    |     |    +-- README.md
+|    |     +-- index.html        
 
 ```
 
