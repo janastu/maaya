@@ -1,0 +1,40 @@
+{
+  "@context": "http://schema.org",
+  "@type": "WebApplication",
+  "name": "Maaya",
+  "url": "https://github.com/salus-sage/maaya",
+  "description": "Create your own AV presentation with images, audio and subtitle.",
+  "applicationCategory": "Multimedia",
+  "applicationSubCategory": "Audio Visual",
+  "genre": "intangible heritage",
+  "about": {
+    "@type": "Event",
+    "description": "Girija Kalyana event at Hampi",
+    "abstract": ""
+  },
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "softwareVersion": "1.0.0",
+  "softwareHelp": {
+    "@type": "CreativeWork",
+  	"url": "https://github.com/salus-sage/maaya/blob/master/README.md"
+  },
+  "operatingSystem": "All",
+  "alternativeHeadline": "Intangibale Heritage of Hampi",
+  "audio": "audio/HampiGirijaKalyanaStorybyCraju.mp3",
+  "author": "Prof. Cheluvaraju, Hampi Kannada University",
+  "contentLocation": "Hampi, Karnataka, India",
+  "contributor": "Janastu",
+  "copyrightHolder": "Prof. Cheluvaraju, Hampi Kannada University",
+  "dateCreated": "",
+  "dateModified": "",
+  "datePublished": "",
+  "headline": "Hampi Girija Kalyana",
+  "inLanguage": "Kannada",
+  "isFamilyFriendly": true,
+  "keywords": "",
+  "locationCreated": "Janastu",
+  "mentions": "",
+  "producer": "Prof. Cheluvaraju, Hampi Kannada University",
+  "provider": "Janastu",
+  "sourceOrganization": "Indian Digital Hampi"
+}
