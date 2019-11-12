@@ -66,10 +66,11 @@ maayaView.prototype = {
 				if(isActive) isActive.removeAttribute('class', 'active');
 
 				activeAnno.setAttribute('class', 'active');
-				activeAnno.scrollIntoView({
+				activeAnno.scrollIntoView(true, {
 					behaviour: "smooth",
 					inline: "start"
 				});
+				window.scrollBy(0, -130);
 			}
 		});
 	}
