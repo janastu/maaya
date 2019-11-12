@@ -70,6 +70,8 @@ maayaView.prototype = {
 					behaviour: "smooth",
 					inline: "start"
 				});
+				// Bug fix: Scrollinto view scrolls too  much
+				//https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
 				window.scrollBy(0, -130);
 			}
 		});
