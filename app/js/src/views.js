@@ -66,10 +66,13 @@ maayaView.prototype = {
 				if(isActive) isActive.removeAttribute('class', 'active');
 
 				activeAnno.setAttribute('class', 'active');
-				activeAnno.scrollIntoView({
+				activeAnno.scrollIntoView(true, {
 					behaviour: "smooth",
 					inline: "start"
 				});
+				// Bug fix: Scrollinto view scrolls too  much
+				//https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
+				window.scrollBy(0, -130);
 			}
 		});
 	}
