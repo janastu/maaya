@@ -1,0 +1,14 @@
+
+
+{
+	"task": "maaya-options",
+	"title": "adivasi-give-our-drums-back",
+	"jsonldUrl": "settings/json-ld.json",
+	"audioUrl": "audio/give-our-drums-back.mp3",
+	"captionsUrl": {
+					"en": "metadata/webvtt/give_our_drums_back_eng_sub.vtt", 
+					"ka": "metadata/webvtt/give_our_drums_back_kan_sub.vtt"
+					},
+	"annotationsUrl": "metadata/webvtt/img-annos-with-kf.vtt",
+	"poster": "Images/drum-01.png"
+}
