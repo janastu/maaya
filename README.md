@@ -1,4 +1,4 @@
-![Logo](logo.jpg)
+![logo](app/logo.jpg)
 
 # Maaya
 
