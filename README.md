@@ -1,3 +1,5 @@
+![Logo](logo.jpg)
+
 # Maaya
 
 Maaya is a class of utilities to generaate a AV presentation
