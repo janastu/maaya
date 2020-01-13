@@ -2,9 +2,9 @@
 
 {
 	"task": "maaya-options",
-	"title": "AnthillHacks2019-Day 7",
+	"title": "AnthillHacks2019-Day 4",
 	"jsonldUrl": "settings/json-ld.json",
-	"audioUrl": "audio/AHH_16_12_2019.mp3",
+	"audioUrl": "audio/day4.mp3",
 	"captionsUrl": {
 					"en": "metadata/webvtt/AHH_16_12_2019_eng_sub.vtt", 
 					"ka": "metadata/webvtt/AHH_16_12_2019_kan_sub.vtt"
