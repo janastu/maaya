@@ -1,0 +1,13 @@
+
+
+{
+	"task": "maaya-options",
+	"title": "Anthillhacks Day 2",
+	"jsonldUrl": "settings/json-ld.json",
+	"audioUrl": "audio/audio-recording.aac",
+	"captionsUrl": {
+					"en": "metadata/webvtt/captions-en.vtt"
+					},
+	"annotationsUrl": "metadata/webvtt/img-annos-with-kf.vtt",
+	"poster": "images/poster.jpeg"
+}
