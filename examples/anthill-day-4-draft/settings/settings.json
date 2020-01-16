@@ -2,13 +2,13 @@
 
 {
 	"task": "maaya-options",
-	"title": "AnthillHacks2019-Day 4",
+	"title": "AnthillHacks2019-Day4",
 	"jsonldUrl": "settings/json-ld.json",
 	"audioUrl": "audio/day4.mp3",
 	"captionsUrl": {
-					"en": "metadata/webvtt/AHH_16_12_2019_eng_sub.vtt", 
-					"ka": "metadata/webvtt/AHH_16_12_2019_kan_sub.vtt"
+					"en": "metadata/webvtt/AHH_day4_eng_sub.vtt", 
+					"ka": "metadata/webvtt/AHH_day4_kan_sub.vtt"
 					},
 	"annotationsUrl": "metadata/webvtt/img-annos-with-kf.vtt",
-	"poster": "Images/AnthillHack_BG_Day10.jpg"
+	"poster": "Images/AnthillHack_BG_Day04.jpg"
 }
