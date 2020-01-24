@@ -1,0 +1,14 @@
+
+
+{
+	"task": "maaya-options",
+	"title": "AnthillHacks2019-Day3",
+	"jsonldUrl": "settings/json-ld.json",
+	"audioUrl": "audio/day3.mp3",
+	"captionsUrl": {
+					"en": "metadata/webvtt/day3_eng_sub.vtt", 
+					"ka": "metadata/webvtt/day3_kan_sub.vtt"
+					},
+	"annotationsUrl": "metadata/webvtt/img-annos-with-kf.vtt",
+	"poster": "Images/AnthillHack_BG_Day03.jpg"
+}
