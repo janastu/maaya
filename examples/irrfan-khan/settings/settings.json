@@ -1,0 +1,14 @@
+
+
+{
+	"task": "maaya-options",
+	"title": "Irrfan Khan, Gentle Man, So Long..",
+	"jsonldUrl": "settings/json-ld.json",
+	"audioUrl": "audio/Irrfan-HandmadeSymposiumS3.mp3",
+	"captionsUrl": {
+					"en": "metadata/webvtt/Irrfan-HandmadeSymposiumS3_eng_sub.vtt", 
+					"ka": "metadata/webvtt/Irrfan-HandmadeSymposiumS3_kan_sub.vtt"
+					},
+	"annotationsUrl": "metadata/webvtt/img-annos-with-kf.vtt",
+	"poster": "Images/ik-img01.jpg"
+}
